@@ -9,13 +9,14 @@
 <script type="text/javascript">
 	$(function(){
 		var count = 0;
-		
+		var name = 1;
 		$("#add").click(function(){
 			
 			if(count<5){
-				var data = '<p class="delP"><input type="file" name="f1"><span class="del">X</span></p>';
+				var data = '<p class="delP"><input type="file" name="f'+name+'"><span class="del">X</span></p>';
 				$("#file").append(data);
 				count++;
+				name++;
 			}else{
 				alert(count+"그만 넣으세요");
 			}
