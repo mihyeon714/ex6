@@ -22,8 +22,7 @@ public class FileController {
 	//sameMultiFileUpload
 	///////////////////다중 파일 업로드 - 파라미터 이름이 같고, 여러개일 경우////////////////////////////////
 	// input type="checkbox" 인것 처럼 배열로 받는 것이 가능하다
-	
-	
+		
 	@RequestMapping(value="sameMultiFileUpload", method=RequestMethod.POST)
 	public void sameMultiFileUpload(MultipartHttpServletRequest request){
 		List<MultipartFile> ar = request.getFiles("f1"); //Iterator로 가져올 수 도 있는데 그것은 파라미터 이름 모를때 사용한다

@@ -11,17 +11,20 @@
 		var count = 0;
 		
 		$("#add").click(function(){
-			count++;
-			if(count<6){
-				var data = '<p><input type="file" name="f1"><span class="delForm">X</span></p>';
+			
+			if(count<5){
+				var data = '<p class="delP"><input type="file" name="f1"><span class="del">X</span></p>';
 				$("#file").append(data);
+				count++;
 			}else{
-				alert("그만 넣으세요");
+				alert(count+"그만 넣으세요");
 			}
 		});
 		
-		$("#file").on("click",".delForm",(function(element){
-			alert("호잇"+element); //인덱스를 어떻게 알아올까 ?
+		$("#file").on("click",".del",(function(){
+			$(this).parent(".delP").remove(); //눌린 본인의 부모 P를 삭제하다
+			count--;
+			alert(count);
 		}));
 		
 	});
