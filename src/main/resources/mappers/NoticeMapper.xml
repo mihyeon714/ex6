@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <!-- namespace는 .xml 을 제외한 파일명써주기  -->
+  <mapper namespace="NoticeMapper">
+  
+  <sql id="search">
+  		<where>
+	  		<if test="search == 'title'">
+	  		title like '%'||#{find}||'%' 
+	  		</if>
+	  		<if test="search == 'writer'">
+	  		writer like '%'||#{find}||'%' 
+	  		</if>
+	  		<if test="search == 'contents'">
+	  		contents like '%'||#{find}||'%' 
+	  		</if>
+  		</where>
+  </sql>
+  
+  
+  
+  
+  
+  
+  	<!-- mybatis쪽에서 진행하는거라서 결과물(dto)을 받을건데... 결과물을 알아서 변환해서줌-->
+  	<select id="view" resultType="com.choa.notice.NoticeDTO" parameterType="java.lang.Integer">
+  		select * from notice where num=#{num}
+  	</select>
+  	
+  	
+  	<!-- 이3가지(insert,update,delete)는 int 가 오는걸 알고있어서 결과 타입 적지 않아도 된다, 띄어쓰기 제약은 없다 -->
+  	<insert id="write" parameterType="com.choa.notice.NoticeDTO">
+  		insert into notice (num,writer,title,contents,reg_date,hit) 
+  		values (notice_seq.nextval, #{writer}, #{title}, #{contents}, sysdate, 0)
+  	</insert>
+  	
+  	<delete id="delete" parameterType="java.lang.Integer">
+  		delete notice where num=#{num}
+  	</delete>
+  	
+  	<update id="update" parameterType="com.choa.notice.NoticeDTO">
+  		update notice set title=#{title},contents=#{contents} where num=#{num}
+  	</update>
+  	
+  	<!-- list지만은 list내의 객체를 resultType으로 하니 되었다 -->
+  	<select id="list" resultType="com.choa.notice.NoticeDTO" parameterType="com.choa.util.ListInfo">
+  		select * from 
+  		(select rownum R,N.* from 
+  		(select * from notice 
+  		<include refid="search"></include>
+  		order by num desc) N) 
+  		where R between #{startRow} and #{lastRow}
+  	</select>
+  	
+  	<select id="count" resultType="java.lang.Integer" parameterType="com.choa.util.ListInfo">
+  		select nvl(count(num),0) from notice
+  		<include refid="search"></include>
+  	</select>
+  	
+  	
+
+  </mapper>

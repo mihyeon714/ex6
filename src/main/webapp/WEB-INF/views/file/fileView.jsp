@@ -10,5 +10,6 @@
 
 	<h2><a href="../resources/upload/${fileName}">${oriName}</a></h2>
 	<a href="./fileDelete?fileName=${fileName}">DELETE</a>
+	<a href="./fileDown?fileName=${fileName}&oriName=${oriName}">DOWNLOAD</a>
 </body>
 </html>
