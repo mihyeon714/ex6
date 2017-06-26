@@ -31,6 +31,6 @@
 	
 	<context:component-scan base-package="com.choa.ex6" />
 	<context:component-scan base-package="com.choa.notice" />
-	
+	<context:component-scan base-package="com.choa.memo" />
 	
 </beans:beans>

@@ -22,11 +22,11 @@
   
   
   
-  
+  <!-- mybatis-config.xml 에서 별칭을 지어줘봤다com.choa.notice.NoticeDTO 를 NoticeDTO로 -->
   
   
   	<!-- mybatis쪽에서 진행하는거라서 결과물(dto)을 받을건데... 결과물을 알아서 변환해서줌-->
-  	<select id="view" resultType="com.choa.notice.NoticeDTO" parameterType="java.lang.Integer">
+  	<select id="view" resultType="NoticeDTO" parameterType="java.lang.Integer">
   		select * from notice where num=#{num}
   	</select>
   	

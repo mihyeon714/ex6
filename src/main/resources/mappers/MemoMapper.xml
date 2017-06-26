@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="MemoMapper">
+  
+  	 <sql id="search">
+  		<where>
+	  		<if test="search == 'writer'">
+	  		writer like '%'||#{find}||'%' 
+	  		</if>
+	  		<if test="search == 'contents'">
+	  		contents like '%'||#{find}||'%' 
+	  		</if>
+  		</where>
+  	</sql>
+  
+  
+  	<select id="list" resultType="com.choa.memo.MemoDTO" parameterType="com.choa.util.ListInfo">
+  		select * from 
+  		(select rownum R, M.* from 
+  		(select * from memo2 
+  		<include refid="search"></include>
+  		order by num desc) M) 
+  		where R between #{startRow} and #{lastRow}
+  	</select>
+  	
+  	<select id="view" resultType="com.choa.memo.MemoDTO" parameterType="java.lang.Integer">
+  		select * from memo2 where num=#{num}
+  	</select>
+  	
+  	<insert id="write" parameterType="com.choa.memo.MemoDTO">
+  		insert into memo2 (num,writer,contents,reg_date) 
+  		values (memo2_seq.nextval, #{writer}, #{contents}, sysdate)
+  	</insert>
+  	
+  	<delete id="delete" parameterType="java.lang.Integer">
+  		delete memo2 where num=#{num}
+  	</delete>
+  	
+  	<update id="update" parameterType="com.choa.memo.MemoDTO">
+  		update memo2 set contents=#{contents} where num=#{num}
+  	</update>
+  	
+  	
+  	<select id="count" resultType="java.lang.Integer" parameterType="com.choa.util.ListInfo">
+  		select nvl(count(num),0) from memo2
+  		<include refid="search"></include>
+  	</select>
+  
+  </mapper>
