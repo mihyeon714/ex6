@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -32,6 +33,17 @@ public class NoticeController {
 		//System.out.println("listInfo curPage= "+listInfo.getCurPage());
 		
 		List<BoardDTO> ar = noticeService.boardList(listInfo);
+		
+		/*
+		//원래는 이건디 @ControllerAdvice  클래스로 던져버린다 
+		try{
+			System.out.println(ar.get(2000).getTitle()); // 일부러 Exception 만들기
+			throw new IndexOutOfBoundsException(); //예외객체 하나를 만들어서 던져주자
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		*/
+		System.out.println(ar.get(2000).getTitle());
 		
 		
 		model.addAttribute("list", ar);
@@ -120,7 +132,15 @@ public class NoticeController {
 		return "redirect:/notice/noticeList?curPage=1";
 	}
 	
-	
+	/*
+	//얘는 NoticeController 안에만 있으니 
+	//한번에 처리하기 위함이 ControllerAdvice 여라
+	@ExceptionHandler(IndexOutOfBoundsException.class) // Exception 종류별로 설정가능 
+	public String exception(){
+		//return "redirect:/"; // Exception 발생시 /(home) 로 보내기 
+		return "error/notFound";
+	}
+	*/
 	
 	
 }
