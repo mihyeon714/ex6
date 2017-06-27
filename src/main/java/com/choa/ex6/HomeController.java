@@ -6,16 +6,24 @@ import java.util.Locale;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.choa.aspect.Transport;
 
 /**
  * Handles requests for the application home page.
  */
 @Controller
 public class HomeController {
+	
+	//AOP 연습하기
+	@Autowired
+	private Transport transport;
+	
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
@@ -24,6 +32,13 @@ public class HomeController {
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
+		
+		// 루트 호출시 버스 타러가자
+		transport.bus(); //앞뒤로 알아서 카드찍기가 실행되야한다 //핵심로직에만 신경쓰는 것이지요 
+		transport.subway();
+		
+		
+		
 		logger.info("Welcome home! The client locale is {}.", locale);
 		
 		Date date = new Date();
