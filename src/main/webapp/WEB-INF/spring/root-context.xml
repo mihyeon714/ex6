@@ -11,33 +11,31 @@
 	<!-- AOP 연습하기 // XML  -->  
 	
 	<!-- 공통 로직 -->
-	<bean class="com.choa.aspect.CardCheck" id="cardCheck"></bean>
-	<bean class="com.choa.aspect.Transport" id="transport"></bean>
-	
-	
+	<!-- <bean class="com.choa.aspect.CardCheck" id="cardCheck"></bean> -->
+
 	
 	<!-- namespace aop 추가하기 -->
-	<aop:config>
-		<!-- 버스,지하철(핵심)에 카드찍기(공통) -->
-		<aop:aspect id="cardAspect" ref="cardCheck"> <!-- cardCheck 에 공통으로 들어갈 것이 있습니다 -->
-			<!-- 어디에 적용할거니 -->
-			<!-- 표현식 패턴에 죄다 적용하시오 -->
-			<!-- 클래스Transport 의 매개변수 있던 없던 몇개던 그 모든 것 ()이라면 없는것 -->
-			<!-- 
+	<!-- <aop:config>
+		버스,지하철(핵심)에 카드찍기(공통)
+		<aop:aspect id="cardAspect" ref="cardCheck"> cardCheck 에 공통으로 들어갈 것이 있습니다
+			어디에 적용할거니
+			표현식 패턴에 죄다 적용하시오
+			클래스Transport 의 매개변수 있던 없던 몇개던 그 모든 것 ()이라면 없는것
+			
 				..   : 하위의 모든 디렉토리
 				*()	 : 하위의 모든 메서드
 				(..) : 모든 매개변수
 				expression이 되게 만하요 
-			 -->
-			<aop:pointcut expression="execution(* com.choa.aspect..Transport.*(..))" id="trans"/>  <!-- Transport의 모든것에 공통사항이 들어가요  -->
 			
-			<!-- 언제 적용할거니 -->
-			<!-- method 는 클래스 중 어떤 메서드를 앞뒤로 실행할거니 -->
+			<aop:pointcut expression="execution(* com.choa.aspect..Transport.*(..))" id="trans"/>  Transport의 모든것에 공통사항이 들어가요 
+			
+			언제 적용할거니
+			method 는 클래스 중 어떤 메서드를 앞뒤로 실행할거니
 			<aop:around method="check" pointcut-ref="trans"/>
 			
 		</aop:aspect>
 		
-		<!-- 여행갈때(핵심) 예약하기(공통) -->
+		여행갈때(핵심) 예약하기(공통)
 		<aop:aspect id="cardReserve" ref="cardCheck">
 			<aop:pointcut expression="execution(* com.choa.aspect..Trip.*(..))" id="reserve"/>
 			<aop:before method="reservation" pointcut-ref="reserve"/>	
@@ -45,7 +43,9 @@
 		
 		
 	</aop:config>
-	
+	 -->
+	 
+
 	
 	
 	

@@ -1,5 +1,8 @@
 package com.choa.aspect;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class Transport {
 	
 	//핵심 로직 만들기

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.choa.aspect.Transport;
+import com.choa.aspect.Trip;
 
 /**
  * Handles requests for the application home page.
@@ -23,6 +24,9 @@ public class HomeController {
 	//AOP 연습하기
 	@Autowired
 	private Transport transport;
+	
+	@Autowired
+	private Trip trip;
 	
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
@@ -36,6 +40,9 @@ public class HomeController {
 		// 루트 호출시 버스 타러가자
 		transport.bus(); //앞뒤로 알아서 카드찍기가 실행되야한다 //핵심로직에만 신경쓰는 것이지요 
 		transport.subway();
+		
+		//여행가기
+		trip.go();
 		
 		
 		
