@@ -16,10 +16,10 @@ public class TableTest extends MyAbstractTestUnit{
 	@Test
 	public void test() throws Exception {
 		TableADTO tableADTO = new TableADTO();
-		tableADTO.setNum(4);
+		tableADTO.setNum(7);
 		tableADTO.setTitle("t2");
 		tableADTO.setWriter("t2");
-		int result = tableService.insertTable(tableADTO, 3); //B넣을때 오류납니다
+		int result = tableService.insertTable(tableADTO, 6); //B넣을때 오류납니다
 		
 		assertNotEquals(0, result);
 	}

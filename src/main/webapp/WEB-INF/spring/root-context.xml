@@ -89,32 +89,40 @@
 	
 	
 	<!-- 			transaction 처리하기 			 -->
+	<tx:annotation-driven/><!-- annotation 사용하기 -->
+	
 	
 	<!-- Connection 가진 dataSource 와 연결해주기 -->
 	<!-- 이것이 공통 로직들어가는 객체다 -->
-	<bean class="org.springframework.jdbc.datasource.DataSourceTransactionManager" id="txManager">
+	<bean class="org.springframework.jdbc.datasource.DataSourceTransactionManager" id="transactionManager">
 		<property name="dataSource" ref="dataSource"></property>
 	</bean>
 	
+	
+	
+	<!-- xml 이용한 transaction 시작 -->
+	
+	
 	<!-- 누구를 -->
 	<!-- 언제 공통사항을 사용할 건지 정의하자// 외부 advice를 만든 것입니다 -->
-	<tx:advice id="txAdvice" transaction-manager="txManager"><!-- 공통사항연결함 -->
+	<!-- <tx:advice id="txAdvice" transaction-manager="transactionManager">공통사항연결함
 		<tx:attributes>
-			<tx:method name="*" rollback-for="Exception"/> <!-- Exception발생했을 때 rollback한다 -->
+			<tx:method name="*" rollback-for="Exception"/> Exception발생했을 때 rollback한다
 		</tx:attributes>
-	</tx:advice>
+	</tx:advice> -->
 	<!-- 어디에 적용할거냐 ? -->
-	<aop:config>
-		<aop:pointcut expression="execution(* com.choa.table..TableService.*(..))" id="requiredTx" /><!-- 어디에 -->
+	<!-- <aop:config>
+		<aop:pointcut expression="execution(* com.choa.table..TableService.*(..))" id="requiredTx" />어디에
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="requiredTx"/>
 	
-		<!-- 하나의 advice를 만들기 위해서 했던 방법 -->
-		<!-- <aop:aspect ref=""> 공통로직객체를 ref 에 적용
+		하나의 advice를 만들기 위해서 했던 방법
+		<aop:aspect ref=""> 공통로직객체를 ref 에 적용
 			<aop:pointcut expression="" id=""/>핵심로직 뭐(expression)
 			<aop:around method=""/>공통로직 언제
-		</aop:aspect> -->
+		</aop:aspect>
 	
-	</aop:config>
+	</aop:config> -->
+	<!-- xml 이용한 transaction 끝 -->
 	
 	
 	

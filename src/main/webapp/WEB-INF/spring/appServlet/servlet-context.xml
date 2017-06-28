@@ -51,6 +51,8 @@
 	 <!-- AOP annotation 사용하기 -->
 	 <!-- 여기서 객체가 만들어지니까 //root먼저들림 -->
 	 <aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+	 
+	
 	
 	
 </beans:beans>
