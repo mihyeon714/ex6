@@ -3,9 +3,11 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
-		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 	
 	
 	<!-- AOP 연습하기 // XML  -->  
@@ -84,6 +86,28 @@
 	<bean class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactoryBean" />
 	</bean>
+	
+	
+	<!-- 			transaction 처리하기 			 -->
+	
+	<!-- Connection 가진 dataSource 와 연결해주기 -->
+	<!-- 이것이 공통 로직들어가는 객체다 -->
+	<bean class="org.springframework.jdbc.datasource.DataSourceTransactionManager" id="txManager">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	
+	<!-- 언제 공통사항을 사용할 건지 정의하자 -->
+	<tx:advice id="txAdvice" transaction-manager="txManager"><!-- 공통사항연결함 -->
+		<tx:attributes>
+			<tx:method name="*" rollback-for="Exception"/> <!-- Exception발생했을 때 rollback한다 -->
+		</tx:attributes>
+	</tx:advice>
+	<!-- 어디에 적용할거냐 ? -->
+	<aop:config>
+		<aop:pointcut expression="execution(* com.choa.table..TableService.*(..))" id="requiredTx" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="requiredTx"/>
+	</aop:config>
+	
 	
 	
 	<!-- FileUpload 분리되서 날아오는 애들 합쳐줘야하는데.. 설정-->

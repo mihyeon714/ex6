@@ -17,6 +17,8 @@
 
 <P>  The time on the server is ${serverTime}. </P>
 
+
+
 <form action=""> 
 	<fieldset style="width:300px;">
 		<legend>납품자정보</legend>
@@ -47,6 +49,7 @@
 	<button>send message</button>
 
 </form>
+
 
 
 
