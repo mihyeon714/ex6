@@ -17,7 +17,7 @@ import com.choa.notice.NoticeServiceImpl;
 import com.choa.util.ListInfo;
 
 @Controller
-@RequestMapping(value="/notice/**")
+@RequestMapping(value="notice/**")
 public class NoticeController {
 	
 	//service객체는 하나뿐이면 된다 
@@ -43,7 +43,7 @@ public class NoticeController {
 			e.printStackTrace();
 		}
 		*/
-		System.out.println(ar.get(2000).getTitle());
+		//System.out.println(ar.get(2000).getTitle());
 		
 		
 		model.addAttribute("list", ar);

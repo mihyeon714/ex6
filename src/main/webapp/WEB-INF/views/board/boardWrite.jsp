@@ -10,7 +10,7 @@
 
 
 <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-<script type="text/javascript" src="../resources/SE2/js/HuskyEZCreator.js" charset="utf-8"></script>
+<script type="text/javascript" src="../../resources/SE2/js/HuskyEZCreator.js" charset="utf-8"></script>
 <script type="text/javascript">
 $(function(){
     //전역변수선언
@@ -19,7 +19,7 @@ $(function(){
     nhn.husky.EZCreator.createInIFrame({
         oAppRef: editor_object,
         elPlaceHolder: "smarteditor",
-        sSkinURI: "../resources/SE2/SmartEditor2Skin.html", 
+        sSkinURI: "../../resources/SE2/SmartEditor2Skin.html", 
         htParams : {
             // 툴바 사용 여부 (true:사용/ false:사용하지 않음)
             bUseToolbar : true,             
@@ -39,7 +39,7 @@ $(function(){
          
         //폼 submit
         $("#frm").submit();
-    })
+    });
 })
 </script>
 

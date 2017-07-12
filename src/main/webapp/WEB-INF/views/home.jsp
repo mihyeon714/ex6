@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="false" %>
 <html>
@@ -6,7 +7,7 @@
 </head>
 <body>
 
-<a href="./notice/noticeList">Notice</a>
+<a href="notice/noticeList">Notice</a>
 
 <h1>
 	Hello world!  
@@ -16,8 +17,9 @@
 	Test 하이
 </h1>
 
-<a href="memo/memoList">MEMO</a>
+<a href="memo/memoList">MEMO</a> <br/>
 
+<a href="file/fileUpload">FILE</a>
 
 <P>  The time on the server is ${serverTime}. </P>
 
