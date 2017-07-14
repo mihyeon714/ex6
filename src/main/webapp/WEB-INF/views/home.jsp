@@ -25,7 +25,7 @@
 
 
 
-<form action=""> 
+<!-- <form action=""> 
 	<fieldset style="width:300px;">
 		<legend>납품자정보</legend>
 		<ol>
@@ -55,7 +55,7 @@
 	<button>send message</button>
 
 </form>
-
+ -->
 
 
 
